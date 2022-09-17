@@ -1,0 +1,20 @@
+#!/usr/bin/php -q
+
+<?php
+
+/* 
+* WPFrame EXECUTE
+* VERSION 0.5.0
+* RELEASE 23-06-2022
+* BY WPFrame
+* Site https://initflex.com/projects/wpframe/
+*/
+
+# $argv for values from command
+
+use WPFP\Boot\System\WPFX\Bootstrap;
+
+include_once __DIR__ . '/Boot/System/WPFX/Bootstrap.php';
+
+$loadWpfxBootstrap = new Bootstrap($argv);
+$loadWpfxBootstrap->system();
