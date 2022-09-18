@@ -2,33 +2,42 @@
 
 namespace WPFP\Boot\System;
 
-use Cake\Database\Connection;
-use Cake\Database\Driver\Mysql;
+use Cake\Datasource\ConnectionManager;
 
 class Model
 {
-    public $wpdb;
+
+    private $pathConfigDatabase;
+    private $databaseConfigFileName = 'Database.php';
+    private $databaseConfigFile;
 
     public function __construct()
     {
-        // SOMETHING
-        global $wpdb;
-        $this->wpdb = $wpdb;
+        // Something
     }
 
-    public function qb()
+    public static function wpdb()
     {
-        $driver = new Mysql([
-            'database' => 'wpframe-plugin',
-            'username' => 'cn023x',
-            'password' => 'root'
-        ]);
-        $connection = new Connection([
-            'driver' => $driver
-        ]);
-
-        return $connection;
+        global $wpdb;
+        return $wpdb;
     }
 
-    
+    public function qbuilder()
+    {
+        $this->pathConfigDatabase = $GLOBALS['WPFP_CONFIG']['base_path'] . $GLOBALS['WPFP_CONFIG']['config_path'];
+        $this->databaseConfigFile = $this->pathConfigDatabase . $this->databaseConfigFileName;
+
+        // check file database config is exist
+        if (file_exists($this->databaseConfigFile)) {
+
+            include $this->databaseConfigFile;
+            
+            ConnectionManager::setConfig('default', $wpfp_database);
+            $connection = ConnectionManager::get('default');
+            return $connection;
+
+        } else {
+            return 'Database Config File Not Found.';
+        }
+    }
 }
