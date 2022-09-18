@@ -2,17 +2,20 @@
 
 namespace WPFP\App\Controllers;
 
+use WPFP\App\Helpers\Blade_view;
 use WPFP\Boot\System\Controller;
 use WPFP\App\Models\M_test;
 
 class Wpf_test extends Controller
 {
     public $M_test;
+    public $bladeview;
 
     public function __construct()
     {
         $this->model('M_test');
         $this->M_test = new M_test();
+        // $this->bladeview = new Blade_view();
 
         // Add Something
     }
@@ -21,7 +24,20 @@ class Wpf_test extends Controller
 
         $getDataTest = $this->M_test->getTest();
         $data['get_data_test'] = $getDataTest;
-        $this->view('v_test', $data);
+
+        $dataset = [
+            'users' =>  $getDataTest,
+            "name"  =>  "Nur Shodik"
+        ];
+        
+        // View - Blade
+        // Using $this Method
+        // $this->bladeview->view('index', $dataset);
+        // Using Static Method
+        Blade_view::render('index', $dataset);
+
+        // View - Default
+        // $this->view('v_test', $data);
     }
     
     // Add Something

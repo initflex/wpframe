@@ -53,6 +53,7 @@ $config = [
   'controllers_path'      =>  './App/Controllers/',
   'models_path'           =>  './App/Models/',
   'views_path'            =>  './App/Views/',
+  'views_path_cache'      =>  './App/Views/cache/',
   'libraries_path'        =>  './App/Libraries/',
   'helpers_path'          =>  './App/Helpers/',
   'starter_path'          =>  './App/Starter/',

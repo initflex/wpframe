@@ -78,8 +78,8 @@ class Bootstrap
         // ------includes file system
         include_once $this->base_system_dir . 'Prepare_funcs.php';
         include_once $this->base_system_dir . 'Http.php';
-        include_once $this->base_system_dir . 'Autoload.php';
         include_once $this->base_vendor_dir .'autoload.php';
+        include_once $this->base_system_dir . 'Autoload.php';
         include_once $this->base_system_dir . 'Controller.php';
         include_once $this->base_system_dir . 'Model.php';
 
@@ -102,5 +102,10 @@ class Bootstrap
 
         $WPFP_controller = new \WPFP\Boot\System\Controller($this, $config, $setUrlController);
         $WPFP_controller->loadInit($setUrlController);
+
+        // Set Error Handler - Get Error
+        $whoops = new \Whoops\Run;
+        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+        $whoops->register();
     }
 }

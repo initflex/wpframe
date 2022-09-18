@@ -1,5 +1,7 @@
 {
     "require": {
-        "cakephp/database": "^4.4"
+        "cakephp/database": "^4.4",
+        "jenssegers/blade": "^1.4",
+        "filp/whoops": "^2.14"
     }
 }

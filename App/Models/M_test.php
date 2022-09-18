@@ -15,14 +15,13 @@ class M_test extends Model
 
     public function getTest()
     {
-        $a = $this->qb()->execute("SELECT * FROM `wp_users`");
-
+        // Query Builder - Cake PHP
         $query = $this->qb()->newQuery();
-        $b  = $query->select('*')->from('wp_users')->where(['ID'    =>  2]);
+        $b  = $query->select('*')
+            ->from('wp_users')
+            ->execute();
 
-        $b = $b->execute();
-
-        $results = $b->fetchAll('assoc');
+        $results = $b->fetchAll('obj');
         return $results;
     }
 }
