@@ -83,6 +83,11 @@ class Bootstrap
         include_once $this->base_system_dir . 'Controller.php';
         include_once $this->base_system_dir . 'Model.php';
 
+        // Set Error Handler - Get Error
+        $whoops = new \Whoops\Run;
+        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+        $whoops->register();
+
         // instances url cleaner & Security
         $cleanUrlController = new \WPFP\Boot\System\Http();
 
@@ -102,10 +107,5 @@ class Bootstrap
 
         $WPFP_controller = new \WPFP\Boot\System\Controller($this, $config, $setUrlController);
         $WPFP_controller->loadInit($setUrlController);
-
-        // Set Error Handler - Get Error
-        $whoops = new \Whoops\Run;
-        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-        $whoops->register();
     }
 }

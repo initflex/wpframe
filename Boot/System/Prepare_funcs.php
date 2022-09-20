@@ -88,7 +88,6 @@ if (!function_exists('is_php')) {
 		if (!isset($_is_php[$version])) {
 			$_is_php[$version] = version_compare(PHP_VERSION, $version, '>=');
 		}
-
 		return $_is_php[$version];
 	}
 }
@@ -111,6 +110,8 @@ function wpfp_fullscreen_end()
 
 /** 
   * Redirect - Default Header Function
+  * @param  String  $url  for set url redirect
+  * @param  Integer  $permanent  For Set Redirect Status Code  
   */
 function wpfp_redirect_url($url, $permanent = false)
 {
@@ -120,6 +121,11 @@ function wpfp_redirect_url($url, $permanent = false)
 
 /** 
   * Redirect Admin url
+  * @param  String  $pageName  for set page name
+  * @param  String  $methodName   For Set Method Name
+  * @param  Array  $paramsSet  For Set Parameters Redirect - Default Empty Array
+  * @param Integer  $statusCode  For set Status Code Redirect - Default Status Code 301
+  * @return false|void  
   */
 function wpfp_admin_redirect($pageName = null, $methodName = null, $paramsSet = [], $statusCode = 301)
 {

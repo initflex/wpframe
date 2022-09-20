@@ -59,8 +59,6 @@ class Wpf_test extends Controller
     {
         wpfp_admin_redirect('wpf-test', 'index', ['name'    =>  'nur shodik', 'data'  =>  'hello']);
     }
-
-    
     
     // Add Something
 }
