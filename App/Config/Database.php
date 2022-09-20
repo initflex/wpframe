@@ -17,11 +17,11 @@ $wpfp_database = [
     // Set Host Database
     'host'          => 'localhost',
     // Set Username Database
-    'username'      => 'cn023x',
+    'username'      => 'root',
     // Set Password Database
-    'password'      => 'root',
+    'password'      => '',
     // Set Database Name
-    'database'      => 'wpframe-plugin',
+    'database'      => 'test-wpframe',
     // Set Type Encoding
     'encoding'      => 'utf8mb4',
     // Set Timezone Database

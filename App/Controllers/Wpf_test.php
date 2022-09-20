@@ -39,6 +39,28 @@ class Wpf_test extends Controller
         // View - Default
         // $this->view('v_test', $data);
     }
+
+    public function test_fullscreen()
+    {
+        wpfp_fullscreen();
+
+        $getDataTest = $this->M_test->getTest();
+        $dataset = [
+            'users' =>  $getDataTest,
+            "name"  =>  "Nur Shodik"
+        ];
+
+        Blade_view::render('index', $dataset);
+
+        wpfp_fullscreen_end();
+    }
+
+    public function test_redirect()
+    {
+        wpfp_admin_redirect('wpf-test', 'index', ['name'    =>  'nur shodik', 'data'  =>  'hello']);
+    }
+
+    
     
     // Add Something
 }
