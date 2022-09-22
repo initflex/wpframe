@@ -20,8 +20,6 @@ class Starter_test
          } );
 
         add_action( 'wp_footer', array($this, 'test2') );
-        
-
     }
 
     public function add_rewrite_urls() {
@@ -30,20 +28,25 @@ class Starter_test
     
         // $get_rewrite_rules = get_option( 'rewrite_rules' );
     
-        $reg_exp = 'test-page-2/view-test(/(.*))?/?$';
+        $reg_exp = 'karir(/(.*))?/?$';
+        $reg_exp2 = 'test5(/(.*))?/?$';
     
         // check if the rule exists
         if ( !isset( $get_rewrite_rules[$reg_exp] ) ) {
     
             add_rewrite_rule(
                 $reg_exp,
-                'index.php?pagename=test-page-2&data=$matches[2]&hellow=datas',
+                'index.php?pagename=karir&data=$matches[2]&=datas',
                 'top'
             );
 
-            flush_rewrite_rules();
+            add_rewrite_rule(
+                $reg_exp2,
+                'index.php?pagename=test5&data=$matches[2]&=datas',
+                'top'
+            );
 
-            
+            flush_rewrite_rules(false);
         }
     }
 
@@ -51,6 +54,7 @@ class Starter_test
     {
         $variable = get_query_var( 'data', 'no value.' );
         var_dump($variable);
+
     }
 
     // Add Something
