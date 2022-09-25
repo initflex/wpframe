@@ -57,6 +57,7 @@ class Bootstrap
         $this->base_library_dir = $this->basePathWpfp . $coreWpfp->configItem('libraries_path');
         $this->base_helper_dir = $this->basePathWpfp . $coreWpfp->configItem('helpers_path');
         $this->base_controller_dir = $this->basePathWpfp . $coreWpfp->configItem('controllers_path');
+        $this->base_fcontroller_dir = $this->basePathWpfp . $coreWpfp->configItem('fcontrollers_path');
         $this->base_model_dir = $this->basePathWpfp . $coreWpfp->configItem('models_path');
         $this->base_view_dir = $this->basePathWpfp . $coreWpfp->configItem('views_path');
         $this->base_starter_dir = $this->basePathWpfp . $coreWpfp->configItem('starter_path');
@@ -74,12 +75,15 @@ class Bootstrap
 
         //---------- Load Configs
         include_once $this->base_config_dir . 'Constants.php';
+        include_once $this->base_config_dir . 'Constants.php';
 
         // ------includes file system
         include_once $this->base_system_dir . 'Prepare_funcs.php';
         include_once $this->base_system_dir . 'Http.php';
-        include_once $this->base_vendor_dir .'autoload.php';
+        include_once $this->base_vendor_dir . 'autoload.php';
         include_once $this->base_system_dir . 'Autoload.php';
+        include_once $this->base_system_dir . 'Frouting.php';
+        include_once $this->base_system_dir . 'Fcontroller.php';
         include_once $this->base_system_dir . 'Controller.php';
         include_once $this->base_system_dir . 'Model.php';
 
@@ -104,6 +108,9 @@ class Bootstrap
         // instancesx
         $WPFP_autoload = new \WPFP\Boot\System\Autoload($this);
         $WPFP_autoload->runAutoload();
+
+        // instance Frontend Route
+        $WPFP_Froute = new \WPFP\Boot\System\Frouting($this);
 
         $WPFP_controller = new \WPFP\Boot\System\Controller($this, $config, $setUrlController);
         $WPFP_controller->loadInit($setUrlController);

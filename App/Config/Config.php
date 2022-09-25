@@ -51,6 +51,7 @@ $config = [
   'system_path'           =>  './Boot/System/',
   'config_path'           =>  './App/Config/',
   'controllers_path'      =>  './App/Controllers/',
+  'fcontrollers_path'      =>  './App/Fcontrollers/',
   'models_path'           =>  './App/Models/',
   'views_path'            =>  './App/Views/',
   'views_path_cache'      =>  './App/Views/cache/',
