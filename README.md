@@ -1,5 +1,5 @@
 # wpframe
-WPFrame Release 0.0.1 Alpha
+WPFrame Release 1.2.1 Beta
 
 Visit Web Official InitFlex
-[WP Frame Web Official](https://initflex.com/)
+[WP Frame Web Official](https://initflex.com/projects/wpframe/)

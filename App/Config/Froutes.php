@@ -12,30 +12,10 @@ $frouting_config = [
 
 $frouting = [
     // 'page-name'    =>  [
-    //     'method_set'        =>  'controller-name',
+    //     'page_set'        =>  'Controller_name',
     //     'first_url_regex'   =>  '',
     //     'last_url_regex'    =>  '',
-    //     'controller_set'    =>  ['WPFP\App\Fcontrollers\Wpf_test', 'index']
-    // ],
-    'karir'    =>  [
-        'page_set'        =>  'Info_karir',
-        'controller_set'    =>  ['WPFP\App\Fcontrollers\Info_karir', 'index']
-    ],
-    'sample-page'    =>  [
-        'page_set'        =>  'Info_karir',
-        'controller_set'    =>  ['WPFP\App\Fcontrollers\Info_karir', 'index']
-    ],
-    'karir-2'    =>  [
-        'page_set'        =>  'Info_karir',
-        'controller_set'    =>  ['WPFP\App\Fcontrollers\Info_karir', 'index']
-    ],
-    'test5'    =>  [
-        'page_set'        =>  'Wpf_test',
-        'controller_set'    =>  ['WPFP\App\Fcontrollers\Wpf_test', 'index']
-    ],
-    'user-account'    =>  [
-        'page_set'          =>  'Pelanggan/Account_pelanggan',
-        'controller_set'    =>  ['WPFP\App\Fcontrollers\Pelanggan\Account_pelanggan', 'index']
-    ]
+    //     'controller_set'    =>  ['WPFP\App\Fcontrollers\Example_controller', 'index_method']
+    // ]
 ];
 

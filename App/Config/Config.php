@@ -51,7 +51,7 @@ $config = [
   'system_path'           =>  './Boot/System/',
   'config_path'           =>  './App/Config/',
   'controllers_path'      =>  './App/Controllers/',
-  'fcontrollers_path'      =>  './App/Fcontrollers/',
+  'fcontrollers_path'     =>  './App/Fcontrollers/',
   'models_path'           =>  './App/Models/',
   'views_path'            =>  './App/Views/',
   'views_path_cache'      =>  './App/Views/cache/',
@@ -59,7 +59,7 @@ $config = [
   'helpers_path'          =>  './App/Helpers/',
   'starter_path'          =>  './App/Starter/',
   'vendor_path'           =>  './vendor/',
-  'lang_path'           =>  './App/Lang/',
+  'lang_path'             =>  './App/Lang/',
 
   // development mode. if is 'TRUE', you can see display error.
   'dev_mode'              =>  TRUE,

@@ -11,5 +11,5 @@ $autoload = [
     'helpers'       =>  ['blade_view'],
 
     // Example 'first_started'
-    'starter'       =>  ['first_started', 'starter_test']
+    'starter'       =>  ['first_started']
 ];

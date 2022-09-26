@@ -44,18 +44,6 @@ $menu_list_sub[] = [
 
 #---------------- (start) wpfx ------------------
 #- don't delete or edit comments "#- wpfxgenerate" from start to end wpfx
-$menu_list_sub[] = [
-    'menu_item' =>  [
-        'page_slug_current'     =>  'wpf-dashboard', // parent slug
-        'page_title'            =>  'Wpf Test', // Title of the page
-        'page_menu_text'        =>  'Wpf Test', // Text to show on the menu link
-        'page_capability'       =>  'manage_options', // Capability requirement to see the link
-        'page_slug'             =>  'wpf-test', // The 'slug' - file to display when clicking the link,
-        'page_render'           =>  array($this, 'default_page_render'), // render view by controller
-        'page_menu_position'    =>  17 // position
-    ]
-];
-
 #-wpfxgenerate
 #---------------- (end) wpfx --------------------
 

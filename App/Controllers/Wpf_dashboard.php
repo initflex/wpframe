@@ -2,6 +2,7 @@
 
 namespace WPFP\App\Controllers;
 
+use WPFP\App\Helpers\Blade_view;
 use WPFP\Boot\System\Controller;
 
 class Wpf_dashboard extends Controller
@@ -16,12 +17,10 @@ class Wpf_dashboard extends Controller
     {
 
         $dataUsers = [
-            'name'      =>  'WPFrame',
+            'name'      =>  'WPFrame User.',
             'message'   =>  'Welcome!, This is Dashboard Menu'
         ];
 
-        $data['data_users'] = $dataUsers;
-
-        $this->view('v_wpf_dashboard', $data);
+        Blade_view::render('index', $dataUsers);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace WPFP\App\Controllers;
 
+use WPFP\App\Helpers\Blade_view;
 use WPFP\Boot\System\Controller;
 
 class Wpf_sub_menu extends Controller
@@ -16,12 +17,10 @@ class Wpf_sub_menu extends Controller
     {
 
         $dataUsers = [
-            'name'      =>  'WPFrame',
-            'message'   =>  'Welcome!, This is Sub Menu'
+            'name'      =>  'WPFrame User - Sub Menu.',
+            'message'   =>  'Welcome!, This is Dashboard Menu'
         ];
 
-        $data['data_users'] = $dataUsers;
-
-        $this->view('v_wpf_submenu', $data);
+        Blade_view::render('index', $dataUsers);
     }
 }
