@@ -11,7 +11,5 @@
 
 <div class="box-ct-toolbox">
     <h1>Welcome!</h1>
-    <?php
-        var_dump($dataset);
-    ?>
+    <?= __wpfp_lang(''); ?>
 </div><?php /**PATH C:\laragon\www\dev-wpframe\wp-content\plugins\wpframe\App\Views/v_karir.blade.php ENDPATH**/ ?>

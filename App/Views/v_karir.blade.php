@@ -11,7 +11,5 @@
 
 <div class="box-ct-toolbox">
     <h1>Welcome!</h1>
-    @php
-        var_dump($dataset);
-    @endphp
+    <?= __wpfp_lang('welcome_msg'); ?>
 </div>

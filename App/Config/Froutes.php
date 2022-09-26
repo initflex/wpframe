@@ -21,6 +21,10 @@ $frouting = [
         'page_set'        =>  'Info_karir',
         'controller_set'    =>  ['WPFP\App\Fcontrollers\Info_karir', 'index']
     ],
+    'sample-page'    =>  [
+        'page_set'        =>  'Info_karir',
+        'controller_set'    =>  ['WPFP\App\Fcontrollers\Info_karir', 'index']
+    ],
     'karir-2'    =>  [
         'page_set'        =>  'Info_karir',
         'controller_set'    =>  ['WPFP\App\Fcontrollers\Info_karir', 'index']

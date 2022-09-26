@@ -153,3 +153,50 @@ function wpfp_admin_redirect($pageName = null, $methodName = null, $paramsSet = 
 	}
 }
 
+function __wpfp_lang($identifier_text_content = '')
+{
+	$identifier_text_content  = trim($identifier_text_content);
+	if ($identifier_text_content !== '') {
+
+		// detect locale
+		if (function_exists('get_locale')) {
+
+			$pluginDir = $GLOBALS['WPFP_CONFIG']['plugin_dir'];
+			$pathLang = $GLOBALS['WPFP_CONFIG']['lang_path'];
+
+			$langSetLocale = get_locale();
+
+			$setlangFile = $pluginDir . $pathLang . $langSetLocale .'/'. $langSetLocale .'.php';
+
+			// check lang file
+			if (file_exists($setlangFile)) {
+				
+				include $setlangFile;
+
+				// check set language in register variable
+				if (isset($lang_register)) {
+
+					// check set language in register variable
+					if (isset($lang_register[$identifier_text_content])) {
+						$setContent = $lang_register[$identifier_text_content];
+						return $setContent;
+					} else {
+						return '';
+					}
+				} else {
+					return 'Variable register not set.';
+				}
+			} else {
+				return 'Language: '. $langSetLocale .'. File Not Found. ';
+			}
+			
+			
+		}else{
+			// get_locale not avaiable.
+			return '';
+		}
+		
+	}else {
+		return '';
+	}
+}

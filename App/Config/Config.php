@@ -59,6 +59,7 @@ $config = [
   'helpers_path'          =>  './App/Helpers/',
   'starter_path'          =>  './App/Starter/',
   'vendor_path'           =>  './vendor/',
+  'lang_path'           =>  './App/Lang/',
 
   // development mode. if is 'TRUE', you can see display error.
   'dev_mode'              =>  TRUE,
