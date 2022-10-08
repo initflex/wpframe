@@ -12,7 +12,7 @@
  * Plugin Name:       WPFrame
  * Plugin URI:        https://initflex.com/projects/wpframe/
  * Description:       Thank you for using WPFrame. Get started for your creative application :)
- * Version:           1.0.0
+ * Version:           1.2.3 RC
  * Author:            Initflex
  * Author URI:        https://github.com/initflex/wpframe/
  * License:           MIT

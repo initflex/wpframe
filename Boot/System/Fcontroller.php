@@ -23,7 +23,7 @@ class Fcontroller
     protected $pathHelper;
     protected $pathLibrary;
     protected $core;
-    protected $configFile = '/wpframe/App/Config/Config.php';
+    protected $configFile = WPF_CONFIG_FILE;
 
     /**
      * For Load Autoload File
@@ -34,7 +34,7 @@ class Fcontroller
      */
     public function autoload($fileLoad = null, $typeLoad = null)
     {
-        include WP_PLUGIN_DIR . $this->configFile;
+        include $this->configFile;
 
         $this->pathHelper = $config['base_path'] . $config['helpers_path'];
         $this->pathLibrary = $config['base_path'] . $config['libraries_path'];
@@ -71,7 +71,7 @@ class Fcontroller
     public function view($viewFile = null, $dataView = [])
     {
 
-        include WP_PLUGIN_DIR . $this->configFile;
+        include $this->configFile;
 
         $this->defaultView = $config['view_error_default'];
         $this->viewSet = $viewFile !== null ? $viewFile : $this->defaultView;
@@ -101,7 +101,7 @@ class Fcontroller
      */
     public function model($modelFile = null, $dataForModelConstruct = null)
     {
-        include WP_PLUGIN_DIR . $this->configFile;
+        include $this->configFile;
 
         $this->defaultModelViewError = $config['model_error_view'];
         $this->modelSet = ucfirst($modelFile);

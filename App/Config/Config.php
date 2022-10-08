@@ -47,7 +47,7 @@ $config = [
   'base_path'             =>  WP_PLUGIN_DIR . '/wpframe/',
 
   // current dir by base path
-  // don't edit this if you don't understand the whole system flow
+  // don't edit this if you don't understand the whole system flow wpframe
   'system_path'           =>  './Boot/System/',
   'config_path'           =>  './App/Config/',
   'controllers_path'      =>  './App/Controllers/',
@@ -63,6 +63,7 @@ $config = [
 
   // development mode. if is 'TRUE', you can see display error.
   'dev_mode'              =>  TRUE,
+  'visual_error'          =>  TRUE,
 
   //app info
   'developer_app'         =>  'Initflex',

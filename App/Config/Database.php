@@ -21,7 +21,7 @@ $wpfp_database = [
     // Set Password Database
     'password'      => '',
     // Set Database Name
-    'database'      => 'dev-wpframe',
+    'database'      => 'test-wpframe',
     // Set Type Encoding
     'encoding'      => 'utf8mb4',
     // Set Timezone Database

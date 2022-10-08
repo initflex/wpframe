@@ -23,7 +23,7 @@ class Controller
     protected $pathHelper;
     protected $pathLibrary;
     protected $core;
-    protected $configFile = '/wpframe/App/Config/Config.php';
+    protected $configFile = WPF_CONFIG_FILE;
 
     /**
      * First Start Controller on Instance
@@ -50,7 +50,7 @@ class Controller
      */
     public function autoload($fileLoad = null, $typeLoad = null)
     {
-        include WP_PLUGIN_DIR . $this->configFile;
+        include $this->configFile;
 
         $this->pathHelper = $config['base_path'] . $config['helpers_path'];
         $this->pathLibrary = $config['base_path'] . $config['libraries_path'];
@@ -87,7 +87,7 @@ class Controller
     public function view($viewFile = null, $dataView = [])
     {
 
-        include WP_PLUGIN_DIR . $this->configFile;
+        include $this->configFile;
 
         $this->defaultView = $config['view_error_default'];
         $this->viewSet = $viewFile !== null ? $viewFile : $this->defaultView;
@@ -117,7 +117,7 @@ class Controller
      */
     public function model($modelFile = null, $dataForModelConstruct = null)
     {
-        include WP_PLUGIN_DIR . $this->configFile;
+        include $this->configFile;
 
         $this->defaultModelViewError = $config['model_error_view'];
         $this->modelSet = ucfirst($modelFile);

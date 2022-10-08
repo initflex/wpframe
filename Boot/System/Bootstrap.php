@@ -15,9 +15,9 @@ class Bootstrap
     public $base_view_dir;
     public $base_starter_dir;
 
-    public $pathPlugin = WP_PLUGIN_DIR . '/wpframe/';
+    public $pathPlugin;
     public $pathConfig = 'App/Config/';
-    public $pathSystem = 'Boot/System/';
+    public $pathSystem;
     protected $funcsCheckFile = 'Default_funcs_checker.php';
     public $core;
 
@@ -33,14 +33,23 @@ class Bootstrap
      */
     public function load()
     {
+        $ds  = DIRECTORY_SEPARATOR;
+
         // run funcs checker
-        include_once $this->pathPlugin . $this->pathSystem . $this->funcsCheckFile;
+        include_once __DIR__ . $ds . $this->funcsCheckFile;
+        
+        // -------includes configs
+        $pathConfigFull = __DIR__ . "$ds..$ds..$ds" . $this->pathConfig;
+        $configFileLoad = __DIR__ . "$ds..$ds..$ds" . $this->pathConfig . 'Config.php';
+        include_once $configFileLoad;
+        include_once $pathConfigFull . 'Constants.php';
+
+        // set default const path
+        $this->pathPlugin = WPF_BASEPATH;
+        $this->pathSystem = WPF_PATHSYSTEM;
 
         // Load Core
         include_once $this->pathPlugin . $this->pathSystem . 'Core.php';
-
-        // -------includes config
-        include_once $this->pathPlugin . $this->pathConfig . 'Config.php';
 
         //instance core
         $this->core = new Core($config);
@@ -73,10 +82,6 @@ class Bootstrap
             error_reporting(0);
         }
 
-        //---------- Load Configs
-        include_once $this->base_config_dir . 'Constants.php';
-        include_once $this->base_config_dir . 'Constants.php';
-
         // ------includes file system
         include_once $this->base_system_dir . 'Prepare_funcs.php';
         include_once $this->base_system_dir . 'Http.php';
@@ -88,9 +93,12 @@ class Bootstrap
         include_once $this->base_system_dir . 'Model.php';
 
         // Set Error Handler - Get Error
-        $whoops = new \Whoops\Run;
-        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-        $whoops->register();
+        // ------- display visual error
+        if ($coreWpfp->configItem('visual_error') !== FALSE) {
+            $whoops = new \Whoops\Run;
+            $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+            $whoops->register();
+        }
 
         // instances url cleaner & Security
         $cleanUrlController = new \WPFP\Boot\System\Http();
