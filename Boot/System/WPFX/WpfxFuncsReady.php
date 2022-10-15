@@ -73,8 +73,11 @@ This command for welcome message. \r
 or \r
 \033[32m Command: [php wpfx serve <set port> '<set root directory>'] \033[0m \r
 ----------------------------------- \r
-(4). Create MVC (Model-View-Controller) \r 
+(4). Create MVC (Model-View-Controller) & for Fcontroller \r 
+ - Create MVC \r 
 \033[32m Command: [php wpfx -create -mvc '<model name>' '<view name>' '<controller name>'] \033[0m \r
+ - Create for Fcontroller \r 
+\033[32m Command: [php wpfx -create -mvc '<model name>' '<view name>' '<fcontroller name> -f'] \033[0m \r
 ----------------------------------- \r
 (5). Create Model \r 
 \033[32m Command: [php wpfx -create -model '<model name>'] \033[0m \r
@@ -82,8 +85,11 @@ or \r
 (6). Create View \r 
 \033[32m Command: [php wpfx -create -view '<view name>'] \033[0m \r
 ----------------------------------- \r
-(7). Create Controller \r 
+(7). Create Controller & Fcontroller \r 
+ - Create Controller \r 
 \033[32m Command: [php wpfx -create -controller '<controller name>'] \033[0m \r
+ - Create Fcontroller \r 
+\033[32m Command: [php wpfx -create -fcontroller '<fcontroller name>'] \033[0m \r
 ----------------------------------- \r
 (8). Create Library \r 
 \033[32m Command: [php wpfx -create -library '<library name>'] \033[0m \r
@@ -100,6 +106,11 @@ or \r
 
 - -Add Sub Routing Page Menu\r 
 \033[32m Command: [php wpfx -routing -add -sub '<sub slug name>' <int position> '<parent slug name>'] \033[0m \r
+----------------------------------- \r
+(12). Add Frontend Routing \r 
+\033[32m Command: [php wpfx -routing -addf '<page name>' '<fcontroller name>' '<namespace>'\033[0m \r 
+\033[32m '<method name>' <first url regex name>' '<last url regex name>'] \033[0m \r
+
 
 Note:
  - The name of the slug is the same as the name of the controller and class
@@ -144,6 +155,9 @@ HOST INFO \r
                 strtolower($this->cleanSpace(trim($this->argv[4]))) : null;
             $avControllerName = isset($this->argv[5]) ? 
                 strtolower($this->cleanSpace(trim($this->argv[5]))) : null;
+
+                $checkFcontrollerSet = isset($this->argv[6]) ? 
+                strtolower($this->cleanSpace(trim($this->argv[6]))) : null;
             
             // model check and create
             if ($avModelName !== null && $avModelName !== '') {
@@ -155,7 +169,11 @@ HOST INFO \r
                     if ($avControllerName !== null && $avControllerName !== '') {
 
                         //var_dump($this->config);
-                
+
+                        if($checkFcontrollerSet !== null){
+                            $this->config['controllers_path'] = $this->config['fcontrollers_path'];
+                        }
+
                         // set condition mvc
                         // model, view, controller is exists?
                         if (
@@ -238,10 +256,49 @@ class ". ucfirst($avModelName) ." extends Model
                                     echo "View Created. \r\n ";
                                     fclose($crtView);
 
-                                    //creating controller
-                                    echo "Creating Controller (". ucfirst($avControllerName) .")... \r\n ";
-                                    $crtController = fopen($fileController, 'w');
-                                    $controllerContent = "<?php
+                                    if($checkFcontrollerSet !== null){
+
+                                        //creating controller
+                                        echo "Creating Fcontroller (". ucfirst($avControllerName) .")... \r\n ";
+                                        $crtController = fopen($fileController, 'w');
+                                        $controllerContent = "<?php
+
+namespace WPFP\App\Fcontrollers;
+
+use WPFP\Boot\System\Fcontroller;
+use WPFP\App\Models\\". ucfirst(str_replace('/', '', $avModelName)) .";
+
+class ". ucfirst($avControllerName) ." extends Fcontroller
+{
+    public \$". ucfirst(str_replace('/', '', $avModelName)) .";
+
+    public function __construct()
+    {
+        \$this->model('". ucfirst($avModelName) ."');
+        \$this->". ucfirst(str_replace('/', '', $avModelName)) ." = new ". ucfirst($avModelName) ."();
+
+        // Add Something
+    }
+
+    public function index(){
+
+        \$this->view('$avViewName');
+    }
+    
+    // Add Something
+}
+                                        ";
+
+                                        fwrite($crtController, $controllerContent);
+                                        echo "Fcontroller Created. \r\n ";
+                                        fclose($crtController);
+
+                                    } else {
+
+                                        //creating controller
+                                        echo "Creating Controller (". ucfirst($avControllerName) .")... \r\n ";
+                                        $crtController = fopen($fileController, 'w');
+                                        $controllerContent = "<?php
 
 namespace WPFP\App\Controllers;
 
@@ -267,11 +324,12 @@ class ". ucfirst($avControllerName) ." extends Controller
     
     // Add Something
 }
-                                    ";
+                                        ";
 
-                                    fwrite($crtController, $controllerContent);
-                                    echo "Controller Created. \r\n ";
-                                    fclose($crtController);
+                                        fwrite($crtController, $controllerContent);
+                                        echo "Controller Created. \r\n ";
+                                        fclose($crtController);
+                                    }
                                     
                 
                                 }else{
@@ -502,6 +560,79 @@ Controller exist. \r\n ". $this->ctxInfoList();
             }else{
                 echo "
 Please insert controller name. \r\n ". $this->ctxInfoList();
+            }
+        }
+
+        // create controller
+        elseif ( 
+            $createAct !== null && $createAct !== '' && 
+            $createAct == '-fcontroller'
+        ) { 
+            $avControllerName = isset($this->argv[3]) ? 
+                strtolower($this->cleanSpace(trim($this->argv[3]))) : null;
+            
+            // controller check and create
+            if ($avControllerName !== null && $avControllerName !== '') {
+
+                //var_dump($this->config);
+        
+                // set condition mvc
+                // controller  is exists?
+                if (
+                    !file_exists($this->dirPluginCt . 
+                    $this->config['fcontrollers_path'] . 
+                    $avControllerName
+                    .'.php') && 
+                    is_dir($this->dirPluginCt . 
+                    $this->config['fcontrollers_path'])
+                ) {
+
+                    $fileController = $this->dirPluginCt . $this->config['fcontrollers_path'] . ucfirst($avControllerName) .'.php';
+
+                    //creating controller
+                    echo "Creating Fcontroller (". ucfirst($avControllerName) .")... \r\n ";
+                    $crtController = fopen($fileController, 'w');
+                    $controllerContent = "<?php
+
+namespace WPFP\App\Fcontrollers;
+
+use WPFP\Boot\System\Fcontroller;
+
+class ". ucfirst($avControllerName) ." extends Fcontroller
+{
+
+    public function __construct()
+    {
+
+        // Add Something
+
+    }
+
+    public function index(){
+
+        echo '
+        <h1 class=\"color-content-theme\">Frontend Controller created successfully.</h1>
+        <p class=\"color-content-theme\">build your app now.</p>
+        ';
+        
+    }
+
+    // Add Something
+}
+                    ";
+
+                    fwrite($crtController, $controllerContent);
+                    echo "Fcontroller Created. \r\n ";
+                    fclose($crtController);
+
+                }else{
+                    echo "
+Fcontroller exist. \r\n ". $this->ctxInfoList();
+                }
+
+            }else{
+                echo "
+Please insert Fcontroller name. \r\n ". $this->ctxInfoList();
             }
         }
 
@@ -857,9 +988,7 @@ Please insert sub page menu routing slug (Ex: page-parent-name). \r\n ". $this->
                             echo "Routing Sub Page Menu added. \r\n ";
                             fclose($edtPageMenu);
 
-                        }
-                        
-                        else{
+                        } else{
                             
                         }
                         
@@ -876,6 +1005,106 @@ Page Menu config (Routes.php) not exists. \r\n ". $this->ctxInfoList();
             }else{
                 echo "
 Please insert Page Menu name. \r\n ". $this->ctxInfoList();
+            }
+
+        } else if(  $createAct !== null && $createAct !== '' && $createAct == '-addf'){
+
+            // config pagemenu is exists?
+            if (
+                file_exists($this->dirPluginCt . 
+                $this->config['config_path'] . 
+                'Froutes.php') && 
+                is_dir($this->dirPluginCt . 
+                $this->config['config_path'])
+            ) {
+
+                $fileFroutes = $this->dirPluginCt . $this->config['config_path'] .'Froutes.php';
+
+                $getContentFroutes = @file_get_contents($fileFroutes);
+
+                $pageNameFroutes = isset($this->argv[3]) ? 
+                    strtolower($this->cleanSpace(trim($this->argv[3]))) : null;
+                $fcontrollerNameFroutes = isset($this->argv[4]) ? 
+                    strtolower($this->cleanSpace(trim($this->argv[4]))) : null;
+                $nameSpaceFroutes = isset($this->argv[5]) ? 
+                    strtolower($this->cleanSpace(trim($this->argv[5]))) : null;
+                $methodNameFroutes = isset($this->argv[6]) ? 
+                    strtolower($this->cleanSpace(trim($this->argv[6]))) : null;
+
+                $firstUrlRegexFroutes = isset($this->argv[7]) ? 
+                    strtolower($this->cleanSpace(trim($this->argv[7]))) : null;
+
+                $lastUrlRegexFroutes = isset($this->argv[8]) ? 
+                    strtolower($this->cleanSpace(trim($this->argv[8]))) : null;
+               
+
+                // PageMenu check and create
+                if ($pageNameFroutes !== null && $pageNameFroutes !== '') {
+
+                    // PageMenu check and create
+                    if ($fcontrollerNameFroutes !== null && $fcontrollerNameFroutes !== '') {
+
+                        // PageMenu check and create
+                        if ($nameSpaceFroutes !== null && $nameSpaceFroutes !== '') {
+
+                            // PageMenu check and create
+                            if ($methodNameFroutes !== null && $methodNameFroutes !== '') {
+
+                                $froutesFile = $this->dirPluginCt . $this->config['config_path'] . 'Froutes.php';
+
+                                $edtFroutes = fopen($froutesFile, 'w+');
+
+                                $fcontrollerNameFroutes = ucfirst($fcontrollerNameFroutes);
+
+                                // auto set namespace
+                                $nameSpaceFroutes = $nameSpaceFroutes == 'default' ? 'WPFP\App\Fcontrollers\\'. $fcontrollerNameFroutes : $nameSpaceFroutes;
+
+                                // check comma for last array
+                                $valContentArray = explode('#-wpfxautogeneratefroutes', $getContentFroutes);
+                                $getLastStringContent = substr(trim($valContentArray[0]), -1);
+
+                                $setCommaIfNeeded = $getLastStringContent == ',' ? ',' : ',';
+                                
+                                $newContentFroutes = "'$pageNameFroutes'    =>  [
+        'page_set'          =>  '$fcontrollerNameFroutes',
+        'first_url_regex'   =>  '$firstUrlRegexFroutes',
+        'last_url_regex'    =>  '$lastUrlRegexFroutes',
+        'controller_set'    =>  ['$nameSpaceFroutes', '$methodNameFroutes']
+    ]$setCommaIfNeeded
+
+    #-wpfxautogeneratefroutes";
+
+                                $setContentFroutes = str_replace(
+                                    '#-wpfxautogeneratefroutes', $newContentFroutes, $getContentFroutes
+                                );
+
+                                fwrite($edtFroutes, $setContentFroutes);
+                                echo "Frouting added. \r\n ";
+                                fclose($edtFroutes);
+
+                            }else{
+                                echo "
+Please insert method name Fcontroller. \r\n ". $this->ctxInfoList();
+                            }
+
+                        }else{
+                            echo "
+Please insert namespace Fcontroller. \r\n ". $this->ctxInfoList();
+                        }
+
+                    }else{
+                        echo "
+Please insert Fcontroller name. \r\n ". $this->ctxInfoList();
+                    }
+
+                }else{
+                    echo "
+Please insert page name. \r\n $pageNameFroutes". $this->ctxInfoList();
+                }
+
+            }else{
+                echo "
+Config file (Froutes.php) not exists. \r\n ". $this->ctxInfoList();
             }
 
         }else{

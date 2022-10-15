@@ -15,12 +15,10 @@ class Wpf_dashboard extends Controller
 
     public function index()
     {
-
         $dataUsers = [
-            'name'      =>  'WPFrame User.',
-            'message'   =>  'Welcome!, This is Dashboard Menu'
+            'name'      =>  wp_get_current_user()->display_name
         ];
 
-        Blade_view::render('index', $dataUsers);
+        Blade_view::render('default_wpframe/index', $dataUsers);
     }
 }

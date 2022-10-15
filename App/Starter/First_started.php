@@ -2,6 +2,8 @@
 
 namespace WPFP\App\Starter;
 
+use WPFP\App\Helpers\Blade_view;
+
 class First_started
 {
 
@@ -24,6 +26,17 @@ class First_started
                 @mkdir($this->dirUploadDefault);
             }
         }
+
+        add_action('admin_head', array($this, 'load_default_header_assets'), 100);
+    }
+
+    public function load_default_header_assets() {
+        $assetsDir = $GLOBALS['WPFP_CONFIG']['assets_url'];
+
+        $data = [
+            'assets_dir' => $assetsDir
+        ];
+        Blade_view::render('default_wpframe/default_wpframe_header_assets', $data);
     }
 
     // Add Something

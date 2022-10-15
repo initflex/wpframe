@@ -15,15 +15,15 @@ $wpfp_database = [
      */
     'persistent'    => false,
     // Set Host Database
-    'host'          => 'localhost',
+    'host'          => DB_HOST,
     // Set Username Database
-    'username'      => 'root',
+    'username'      => DB_USER,
     // Set Password Database
-    'password'      => '',
+    'password'      => DB_PASSWORD,
     // Set Database Name
-    'database'      => 'test-wpframe',
+    'database'      => DB_NAME,
     // Set Type Encoding
-    'encoding'      => 'utf8mb4',
+    'encoding'      => DB_CHARSET,
     // Set Timezone Database
     'timezone'      => 'UTC',
     /**

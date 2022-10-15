@@ -1,0 +1,68 @@
+
+@font-face {
+    font-family: 'Jetbrains Mono', monospace;
+    src: url(../fonts/jetbrains-mono/woff2/JetBrainsMono-Regular.woff2);
+}
+
+.wpf-flex-container-1 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(auto, 1fr));
+}
+
+.wpf-flex-container-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
+    grid-template-rows: repeat(auto-fit, minmax(auto, 2fr));
+}
+.wpf-text-center {
+    text-align: center;
+}
+
+.wpf-logo-intro {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+
+.wpf-spacing {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.wpf-box-container {
+    font-family: 'jetbrains Mono';
+    background-color: #fff;
+    display: block;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    padding: 15px;
+    margin-top: 30px;
+    margin-right: 20px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0px 0px 8px rgba(0, 0,  0, 0.1);
+    -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0px 0px 8px rgba(0, 0,  0, 0.1);
+    -o-box-shadow: 0px 0px 8px rgba(0, 0,   0   , 0.1);
+}
+
+.wpf-box-container h1 {
+    font-size: 24px;
+    line-height: 25px;
+    word-spacing: -3px;
+}
+
+.wpf-button-primary {
+    color: #fff;
+    padding: 10px 10px;
+    background-color: #3b5998;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border: 0px solid transparent;
+}

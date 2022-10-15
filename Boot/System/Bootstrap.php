@@ -40,7 +40,7 @@ class Bootstrap
         
         // -------includes configs
         $pathConfigFull = __DIR__ . "$ds..$ds..$ds" . $this->pathConfig;
-        $configFileLoad = __DIR__ . "$ds..$ds..$ds" . $this->pathConfig . 'Config.php';
+        $configFileLoad = $pathConfigFull . 'Config.php';
         include_once $configFileLoad;
         include_once $pathConfigFull . 'Constants.php';
 
