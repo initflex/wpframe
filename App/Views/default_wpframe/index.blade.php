@@ -2,7 +2,7 @@
     <img class="wpf-logo-intro" src="{{ $GLOBALS['WPFP_CONFIG']['assets_url'] .'images/logos/favicon-96x96.png' }}" alt="">
     <div class="wpf-text-center">
         <h1>{{ $GLOBALS['WPFP_CONFIG']['developer_app'] }} - WPFrame</h1>
-        <p>Open Source Project - <a href="https://initflex.com/" target="_blank">Initflex - WPFrame</a></p>
+        <p>Open Source Project - <a href="https://initflex.com/" target="_blank">Initflex</a></p>
     </div>
     
 </div>
