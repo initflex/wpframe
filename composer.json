@@ -2,6 +2,15 @@
     "require": {
         "cakephp/database": "^4.4",
         "jenssegers/blade": "^1.4",
-        "filp/whoops": "^2.14"
+        "filp/whoops": "^2.14",
+        "clancats/hydrahon": "^1.1",
+        "illuminate/database": "^8.83",
+        "illuminate/events": "^8.83",
+        "vlucas/phpdotenv": "^5.5"
+    },
+    "autoload": {
+        "classmap": [
+            "./App/Models/"
+        ]
     }
 }

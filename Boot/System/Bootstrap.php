@@ -17,6 +17,7 @@ class Bootstrap
 
     public $pathPlugin;
     public $pathConfig = 'App/Config/';
+    protected $autoloadFile = __DIR__ .'/../../vendor/autoload.php';
     public $pathSystem;
     protected $funcsCheckFile = 'Default_funcs_checker.php';
     public $core;
@@ -33,6 +34,25 @@ class Bootstrap
      */
     public function load()
     {
+
+        //------- Load vendor files
+        include_once  $this->autoloadFile;
+
+        //------- Load .Env
+        $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ .'/../../');
+        $dotenv->safeLoad();
+
+        // ------- Load WPFP Env function
+        include_once WP_PLUGIN_DIR . $_ENV['WPFP_PLUGIN_DIR'] . $_ENV['WPFP_SYSTEM_PATH'] .'Env_loader.php';
+
+        // Set Error Handler - Get Error
+        // ------- display visual error
+        if (Env::get('VISUAL_ERROR') == 'true') {
+            $whoops = new \Whoops\Run;
+            $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+            $whoops->register();
+        }
+
         $ds  = DIRECTORY_SEPARATOR;
 
         // run funcs checker
@@ -72,7 +92,7 @@ class Bootstrap
         $this->base_starter_dir = $this->basePathWpfp . $coreWpfp->configItem('starter_path');
 
         // -------display errors
-        if ($coreWpfp->configItem('dev_mode') !== FALSE) {
+        if ($coreWpfp->configItem('dev_mode') == 'true') {
             ini_set('display_errors', '1');
             ini_set('display_startup_errors', '1');
             error_reporting(E_ALL);
@@ -82,23 +102,17 @@ class Bootstrap
             error_reporting(0);
         }
 
-        // ------includes file system
+        // ------includes system files
         include_once $this->base_system_dir . 'Prepare_funcs.php';
         include_once $this->base_system_dir . 'Http.php';
-        include_once $this->base_vendor_dir . 'autoload.php';
         include_once $this->base_system_dir . 'Autoload.php';
         include_once $this->base_system_dir . 'Frouting.php';
         include_once $this->base_system_dir . 'Fcontroller.php';
         include_once $this->base_system_dir . 'Controller.php';
         include_once $this->base_system_dir . 'Model.php';
 
-        // Set Error Handler - Get Error
-        // ------- display visual error
-        if ($coreWpfp->configItem('visual_error') !== FALSE) {
-            $whoops = new \Whoops\Run;
-            $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-            $whoops->register();
-        }
+        // ------includes config files
+        include_once $this->base_config_dir . 'Database.php';
 
         // instances url cleaner & Security
         $cleanUrlController = new \WPFP\Boot\System\Http();
@@ -120,6 +134,7 @@ class Bootstrap
         // instance Frontend Route
         $WPFP_Froute = new \WPFP\Boot\System\Frouting($this);
 
+        // instance Backend Controller
         $WPFP_controller = new \WPFP\Boot\System\Controller($this, $config, $setUrlController);
         $WPFP_controller->loadInit($setUrlController);
     }

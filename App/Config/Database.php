@@ -1,4 +1,39 @@
 <?php
+use WPFP\Boot\System\Env;
+use Illuminate\Database\Capsule\Manager as Capsule;
+
+/** 
+ * First, create a new "Capsule" manager instance. 
+ * Capsule aims to make configuring the library for usage outside of 
+ * the Laravel framework as easy as possible.
+  */
+$capsule = new Capsule;
+
+$capsule->addConnection([
+    'driver'    =>  Env::get('DB_CONNECTION'),
+    'host'      =>  DB_HOST,
+    'database'  =>  DB_NAME,
+    'username'  =>  DB_USER,
+    'password'  =>  DB_PASSWORD,
+    'charset'   =>  Env::get('DB_CHARSET'),
+    'collation' =>  Env::get('DB_COLLATION'),
+    'prefix'    =>  Env::get('DB_PREFIX'),
+]);
+
+// Set the event dispatcher used by Eloquent models... (optional)
+use Illuminate\Events\Dispatcher as LaravelDispatcher;
+use Illuminate\Container\Container as LaravelContainer;
+$capsule->setEventDispatcher(new LaravelDispatcher(new LaravelContainer));
+
+// Make this Capsule instance available globally via static methods... (optional)
+$capsule->setAsGlobal();
+
+// Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
+$capsule->bootEloquent();
+
+
+#=====================END LARAVEL CONFIG ========================#
+
 
 /**
  * This config for CakePHP v.4.x database Configuration

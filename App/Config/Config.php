@@ -1,4 +1,5 @@
 <?php
+use WPFP\Boot\System\Env;
 
 /**
  * Default Configuration
@@ -6,7 +7,7 @@
  */
 $config = [
   // time
-  'default_time_zone'     =>  'asia/jakarta',
+  'default_time_zone'     =>  Env::get('DEFAULT_TIME_ZONE'),
 
   // Url
   // base Url 
@@ -43,8 +44,8 @@ $config = [
   'url_separator_set'     =>  '--',
 
   //directory and files
-  'plugin_dir'            =>  WP_PLUGIN_DIR . '/wpframe/',
-  'base_path'             =>  WP_PLUGIN_DIR . '/wpframe/',
+  'plugin_dir'            =>  WP_PLUGIN_DIR . Env::get('WPFP_PLUGIN_DIR'),
+  'base_path'             =>  WP_PLUGIN_DIR . Env::get('WPFP_BASE_DIR'),
 
   // current dir by base path
   // don't edit this if you don't understand the whole system flow wpframe
@@ -60,10 +61,11 @@ $config = [
   'starter_path'          =>  './App/Starter/',
   'vendor_path'           =>  './vendor/',
   'lang_path'             =>  './App/Lang/',
+  'env_path'             =>   './',
 
   // development mode. if is 'TRUE', you can see display error.
-  'dev_mode'              =>  TRUE,
-  'visual_error'          =>  TRUE,
+  'dev_mode'              =>  Env::get('APP_DEBUG'),
+  'visual_error'          =>  Env::get('VISUAL_ERROR'),
 
   //app info
   'developer_app'         =>  'Initflex',

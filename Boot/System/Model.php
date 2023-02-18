@@ -30,8 +30,6 @@ class Model
         // check file database config is exist
         if (file_exists($this->databaseConfigFile)) {
 
-            include $this->databaseConfigFile;
-            
             ConnectionManager::setConfig('default', $wpfp_database);
             $connection = ConnectionManager::get('default');
             return $connection;
