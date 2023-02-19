@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '02e61244bf29660f44f92caa4c55b35dc4689951',
+        'reference' => '66ce594751fd6f748ab05fd665e085e5afa2fd31',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '02e61244bf29660f44f92caa4c55b35dc4689951',
+            'reference' => '66ce594751fd6f748ab05fd665e085e5afa2fd31',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -70,6 +70,15 @@
             'reference' => 'ade2b3bbfb776f27f0558e26eed43b5d9fe1b392',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/inflector',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'eftec/bladeone' => array(
+            'pretty_version' => '4.8',
+            'version' => '4.8.0.0',
+            'reference' => '26b79fc337a7c584c7d222dc1dbc6d34771d0394',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../eftec/bladeone',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -199,6 +208,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'monolog/monolog' => array(
+            'pretty_version' => '2.9.1',
+            'version' => '2.9.1.0',
+            'reference' => 'f259e2b15fb95494c83f52d3caad003bbf5ffaa1',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../monolog/monolog',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'nesbot/carbon' => array(
             'pretty_version' => '2.62.1',
             'version' => '2.62.1.0',
@@ -245,6 +263,7 @@
             'dev_requirement' => false,
             'provided' => array(
                 0 => '1.0|2.0',
+                1 => '1.0.0 || 2.0.0 || 3.0.0',
             ),
         ),
         'psr/simple-cache' => array(

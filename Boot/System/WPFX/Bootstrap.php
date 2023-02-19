@@ -1,6 +1,7 @@
 <?php
 
 namespace WPFP\Boot\System\WPFX;
+use WPFP\Boot\System\Env;
 
 class Bootstrap
 {
@@ -23,6 +24,15 @@ class Bootstrap
     {
         // check required functions
         include $this->pathPlugin . $this->pathSystem . 'Default_funcs_checker.php';
+
+        //------- Load vendor files
+        include $this->pathPlugin . 'vendor/autoload.php';
+
+        //------- Load .Env
+        $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ .'/../../../');
+        $dotenv->safeLoad();
+
+        include $this->pathPlugin . $this->pathSystem . 'Env_loader.php';
 
         // include config
         include $this->pathPlugin . $this->configFile;

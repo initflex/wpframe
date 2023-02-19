@@ -2,6 +2,9 @@
 
 namespace WPFP\Boot\System;
 
+/** 
+ * run WPFrame system boot
+*/
 class Bootstrap
 {
     public $basePathWpfp;
@@ -24,8 +27,7 @@ class Bootstrap
 
     public function __construct()
     {
-        @ob_start();
-        if (session_status() === PHP_SESSION_NONE) session_start();
+        // Something
     }
 
     /**
@@ -47,11 +49,18 @@ class Bootstrap
 
         // Set Error Handler - Get Error
         // ------- display visual error
+        $whoops = new \Whoops\Run;
         if (Env::get('VISUAL_ERROR') == 'true') {
-            $whoops = new \Whoops\Run;
             $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-            $whoops->register();
         }
+
+        $whoops->pushHandler(function($exception, $inspector, $run) {
+            include_once $this->base_system_dir . 'Error_handler.php';
+            $WPFPErrorHandler = new Error_handler();
+            $WPFPErrorHandler->WPFPErrorHandler($exception->getMessage() .' | Line: '. $exception->getLine() .' | File: '. $exception->getFile() .' | Code: '. $exception->getCode());
+            return \Whoops\Handler\Handler::DONE;
+        });
+        $whoops->register();
 
         $ds  = DIRECTORY_SEPARATOR;
 
@@ -75,6 +84,30 @@ class Bootstrap
         $this->core = new Core($config);
         $coreWpfp = $this->core;
 
+        // -------display errors
+        if ($coreWpfp->configItem('dev_mode') == 'true') {
+            ini_set('display_errors', '1');
+            ini_set('display_startup_errors', '1');
+            error_reporting(E_ALL);
+        } else {
+            ini_set('display_errors', 0);
+            ini_set('display_startup_errors', 0);
+            error_reporting(0);
+        }
+        
+        // session custom save path
+        if($coreWpfp->configItem('session_save_path_active') == 'true') {
+            if(is_dir($coreWpfp->configItem('session_save_path'))) {
+                ini_set('session.save_path', $coreWpfp->configItem('session_save_path'));
+            }else{
+                echo "<h3>Session save path: Directory not found. </h3>";
+            }
+        }
+
+        // Start Session
+        @ob_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
         // set all config started
         date_default_timezone_set($coreWpfp->configItem('default_time_zone'));
 
@@ -91,17 +124,6 @@ class Bootstrap
         $this->base_view_dir = $this->basePathWpfp . $coreWpfp->configItem('views_path');
         $this->base_starter_dir = $this->basePathWpfp . $coreWpfp->configItem('starter_path');
 
-        // -------display errors
-        if ($coreWpfp->configItem('dev_mode') == 'true') {
-            ini_set('display_errors', '1');
-            ini_set('display_startup_errors', '1');
-            error_reporting(E_ALL);
-        } else {
-            ini_set('display_errors', 0);
-            ini_set('display_startup_errors', 0);
-            error_reporting(0);
-        }
-
         // ------includes system files
         include_once $this->base_system_dir . 'Prepare_funcs.php';
         include_once $this->base_system_dir . 'Http.php';
@@ -111,8 +133,10 @@ class Bootstrap
         include_once $this->base_system_dir . 'Controller.php';
         include_once $this->base_system_dir . 'Model.php';
 
-        // ------includes config files
-        include_once $this->base_config_dir . 'Database.php';
+        if(Env::get('DB_STATUS') == 'active'){
+            // ------includes config files
+            include_once $this->base_config_dir . 'Database.php';
+        }
 
         // instances url cleaner & Security
         $cleanUrlController = new \WPFP\Boot\System\Http();
@@ -137,5 +161,6 @@ class Bootstrap
         // instance Backend Controller
         $WPFP_controller = new \WPFP\Boot\System\Controller($this, $config, $setUrlController);
         $WPFP_controller->loadInit($setUrlController);
+
     }
 }

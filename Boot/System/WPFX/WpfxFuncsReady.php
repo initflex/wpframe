@@ -1,6 +1,7 @@
 <?php
 
 namespace WPFP\Boot\System\WPFX;
+use WPFP\Boot\System\Env;
 
 class WpfxFuncsReady
 {
@@ -75,41 +76,46 @@ or \r
 ----------------------------------- \r
 (4). Create MVC (Model-View-Controller) & for Fcontroller \r 
  - Create MVC \r 
-\033[32m Command: [php wpfx -create -mvc '<model name>' '<view name>' '<controller name>'] \033[0m \r
+\033[32m Command: [php wpfx create -mvc '<model name>' '<view name>' '<controller name>'] \033[0m \r
  - Create for Fcontroller \r 
-\033[32m Command: [php wpfx -create -mvc '<model name>' '<view name>' '<fcontroller name> -f'] \033[0m \r
+\033[32m Command: [php wpfx create -mvc '<model name>' '<view name>' '<fcontroller name> -f'] \033[0m \r
 ----------------------------------- \r
 (5). Create Model \r 
-\033[32m Command: [php wpfx -create -model '<model name>'] \033[0m \r
+\033[32m Command: [php wpfx create -model '<model name>'] \033[0m \r
 ----------------------------------- \r
 (6). Create View \r 
-\033[32m Command: [php wpfx -create -view '<view name>'] \033[0m \r
+\033[32m Command: [php wpfx create -view '<view name>'] \033[0m \r
 ----------------------------------- \r
 (7). Create Controller & Fcontroller \r 
  - Create Controller \r 
-\033[32m Command: [php wpfx -create -controller '<controller name>'] \033[0m \r
+\033[32m Command: [php wpfx create -controller '<controller name>'] \033[0m \r
  - Create Fcontroller \r 
-\033[32m Command: [php wpfx -create -fcontroller '<fcontroller name>'] \033[0m \r
+\033[32m Command: [php wpfx create -fcontroller '<fcontroller name>'] \033[0m \r
 ----------------------------------- \r
 (8). Create Library \r 
-\033[32m Command: [php wpfx -create -library '<library name>'] \033[0m \r
+\033[32m Command: [php wpfx create -library '<library name>'] \033[0m \r
 ----------------------------------- \r
 (9). Create Helper \r 
-\033[32m Command: [php wpfx -create -helper '<helper name>'] \033[0m \r
+\033[32m Command: [php wpfx create -helper '<helper name>'] \033[0m \r
 ----------------------------------- \r
 (10). Create Starter \r 
-\033[32m Command: [php wpfx -create -starter '<starter name>'] \033[0m \r
+\033[32m Command: [php wpfx create -starter '<starter name>'] \033[0m \r
 ----------------------------------- \r
 (11). Add Routing \r 
 - Add Parent Routing Page Menu
-\033[32m Command: [php wpfx -routing -add -parent '<slug name>' <int position>] \033[0m \r
+\033[32m Command: [php wpfx routing -add -parent '<slug name>' <int position>] \033[0m \r
 
 - -Add Sub Routing Page Menu\r 
-\033[32m Command: [php wpfx -routing -add -sub '<sub slug name>' <int position> '<parent slug name>'] \033[0m \r
+\033[32m Command: [php wpfx routing -add -sub '<sub slug name>' <int position> '<parent slug name>'] \033[0m \r
 ----------------------------------- \r
 (12). Add Frontend Routing \r 
-\033[32m Command: [php wpfx -routing -addf '<page name>' '<fcontroller name>' '<namespace>'\033[0m \r 
+\033[32m Command: [php wpfx routing -addf '<page name>' '<fcontroller name>' '<namespace>'\033[0m \r 
 \033[32m '<method name>' <first url regex name>' '<last url regex name>'] \033[0m \r
+----------------------------------- \r
+(13). Run migration \r 
+\033[32m Command: [php wpfx migration -create '<migration name>'] \r
+
+\033[32m Command: [php wpfx migration -install ] \r
 
 
 Note:
@@ -212,12 +218,36 @@ HOST INFO \r
                                     echo " Creating Model (". ucfirst($avModelName) .")... \r\n ";
                                     $crtModel = fopen($fileModel, 'w');
                                     $modelContent = "<?php
-
 namespace WPFP\App\Models;
-
-use WPFP\Boot\System\Model;
+use WPFP\Boot\System\Model as WPFPModel;
+use Illuminate\Database\Eloquent\Model;
 
 class ". ucfirst($avModelName) ." extends Model
+{
+    // This for Example Code.
+
+    public \$timestamps = false;
+    
+    /**
+    * The database table used by the model.
+    *
+    * @var string
+    */
+    protected \$table = 'wp_posts';
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected \$fillable = [
+        'ID', 'post_author', 'post_date', 'post_title'
+    ];
+}
+
+/**
+ * This for WPFP Model Since 1.3.0
+*/
+class WPFP". ucfirst($avModelName) ." extends WPFPModel
 {
     // Add Something
     
@@ -267,6 +297,7 @@ namespace WPFP\App\Fcontrollers;
 
 use WPFP\Boot\System\Fcontroller;
 use WPFP\App\Models\\". ucfirst(str_replace('/', '', $avModelName)) .";
+use WPFP\App\Models\\WPFP". ucfirst(str_replace('/', '', $avModelName)) .";
 
 class ". ucfirst($avControllerName) ." extends Fcontroller
 {
@@ -304,6 +335,7 @@ namespace WPFP\App\Controllers;
 
 use WPFP\Boot\System\Controller;
 use WPFP\App\Models\\". ucfirst(str_replace('/', '', $avModelName)) .";
+use WPFP\App\Models\\WPFP". ucfirst(str_replace('/', '', $avModelName)) .";
 
 class ". ucfirst($avControllerName) ." extends Controller
 {
@@ -396,23 +428,46 @@ Please insert model name. \r\n ". $this->ctxInfoList();
                     echo " Creating Model (". ucfirst($avModelName) .")... \r\n ";
                     $crtModel = fopen($fileModel, 'w');
                     $modelContent = "<?php
-
 namespace WPFP\App\Models;
-
-use WPFP\Boot\System\Model;
+use WPFP\Boot\System\Model as WPFPModel;
+use Illuminate\Database\Eloquent\Model;
 
 class ". ucfirst($avModelName) ." extends Model
 {
-    // Add Something
+    // This for Example Code.
 
+    public \$timestamps = false;
+    
+    /**
+    * The database table used by the model.
+    *
+    * @var string
+    */
+    protected \$table = 'wp_posts';
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected \$fillable = [
+        'ID', 'post_author', 'post_date', 'post_title'
+    ];
+}
+
+/**
+ * This for WPFP Model Since 1.3.0
+*/
+class WPFP". ucfirst($avModelName) ." extends WPFPModel
+{
+    // Add Something
+    
     public function __construct()
     {
         // Add Something
     }
 }
 
-// Add Something
-                    ";
+// Add Something";
 
                     fwrite($crtModel, $modelContent);
                     echo "Model Created. \r\n ";
@@ -1108,6 +1163,149 @@ Config file (Froutes.php) not exists. \r\n ". $this->ctxInfoList();
             }
 
         }else{
+            echo $this->msgOprtErr("You can view the list of commands by typing: 'php wpfx -clist'", "$createAct");
+        }
+    }
+
+    // migration
+    public function migration($createAct = null, $argv = null)
+    {
+        $this->config = $GLOBALS['CT_CONFIG'];
+        $this->argv = $argv;
+        $migrationPath = $this->dirPluginCt . $this->config['migrations_path'];
+        $configPath = $this->dirPluginCt . $this->config['config_path'];
+
+        $createAct = isset($this->argv[2]) ? trim($this->argv[2]) : null; 
+
+        // create mvc
+        if ( 
+            $createAct !== null && $createAct !== '' && 
+            $createAct == '-create'
+        ) { 
+            $migrationName = isset($this->argv[3]) ? 
+                $this->cleanSpace(trim($this->argv[3])) : null;
+            
+            // model check and create
+            if ($migrationName !== null && $migrationName !== '') {
+        
+                // migration file is exists?
+                if (
+                    !file_exists($this->dirPluginCt . 
+                    $this->config['migrations_path'] . 
+                    $migrationName
+                    .'.php') && 
+                    is_dir($this->dirPluginCt . 
+                    $this->config['migrations_path'])
+                ) {
+
+                    $fileMgrt = $this->dirPluginCt . $this->config['migrations_path'] . $migrationName .'.php';
+
+                    // creating view
+                    echo "Creating Migration File (". $migrationName .")... \r\n ";
+                    $crtMig = fopen($fileMgrt, 'w');
+                    $mgrtContent = "<?php
+
+use Illuminate\Database\Capsule\Manager as Capsule;
+
+class $migrationName {
+
+    public function __construct()
+    {
+        //Example Migration
+
+        Capsule::schema()->create('users', function (\$table) {
+            \$table->increments('id');
+            \$table->string('name');
+            \$table->string('email')->unique();
+            \$table->string('password');
+            \$table->timestamps();
+        });
+
+        Capsule::schema()->create('posts', function (\$table) {
+            \$table->increments('id');
+            \$table->string('title');
+            \$table->text('body');
+            \$table->integer('created_by')->unsigned();
+            \$table->timestamps();
+        });
+    }
+
+}
+                    ";
+
+                    fwrite($crtMig, $mgrtContent);
+                    echo "Migration File Created. \r\n ";
+                    fclose($crtMig);
+
+                }else{
+                    echo "
+Migration file is exist. \r\n ". $this->ctxInfoList();
+                }
+
+            }else{
+                echo "
+Please insert migration name. \r\n ". $this->ctxInfoList();
+            }
+        }
+
+        else if ( 
+            $createAct !== null && $createAct !== '' && 
+            $createAct == '-install'
+        ) { 
+            $migrationName = isset($this->argv[3]) ? 
+                $this->cleanSpace(trim($this->argv[3])) : null;
+            
+            // model check and create
+            if (
+                $migrationName !== null && $migrationName !== '' && 
+                $migrationName == '-all'
+            ) {
+
+                $openDirMigrations = opendir($migrationPath);
+                $countMigrationFile = 0;
+                while($itemMigrations = readdir($openDirMigrations)){
+        
+                    // migration file is exists?
+                    $itemSetMigration = $migrationPath . $itemMigrations;
+                    if (!is_dir($itemSetMigration)) {
+
+                        ini_set('display_errors', 0);
+                        error_reporting(E_ALL);
+
+                        // run migration
+                        try {
+
+                            // ------include required files
+                            include_once $this->dirPluginCt .'../../../wp-config.php';
+                            include_once $configPath .'Database.php'; 
+                            include_once $migrationPath . $itemMigrations;
+
+                            $getClassName = explode('.', $itemMigrations)[0];
+                            new $getClassName();
+                        }
+                        catch (Exception $e)
+                        {
+                            echo $e->getMessage();
+                        }
+
+                        $countMigrationFile++;
+                        
+                    }
+                }
+
+                if($countMigrationFile == 0){
+                    echo "
+Migration file not exist. \r\n ". $this->ctxInfoList();
+                }
+
+            }else{
+                echo "
+Please insert migration name. \r\n ". $this->ctxInfoList();
+            }
+        }
+
+        // ADD SOMETHING
+        else{
             echo $this->msgOprtErr("You can view the list of commands by typing: 'php wpfx -clist'", "$createAct");
         }
     }

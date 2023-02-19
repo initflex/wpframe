@@ -55,26 +55,33 @@ $config = [
   'fcontrollers_path'     =>  './App/Fcontrollers/',
   'models_path'           =>  './App/Models/',
   'views_path'            =>  './App/Views/',
-  'views_path_cache'      =>  './App/Views/cache/',
+  'views_path_cache'      =>  Env::get('VIEW_CACHE_SAVE_PATH'),
   'libraries_path'        =>  './App/Libraries/',
   'helpers_path'          =>  './App/Helpers/',
   'starter_path'          =>  './App/Starter/',
   'vendor_path'           =>  './vendor/',
   'lang_path'             =>  './App/Lang/',
+  'migrations_path'             =>  './App/Migrations/',
   'env_path'             =>   './',
 
   // development mode. if is 'TRUE', you can see display error.
   'dev_mode'              =>  Env::get('APP_DEBUG'),
   'visual_error'          =>  Env::get('VISUAL_ERROR'),
+  'error_log_save'        =>  WP_PLUGIN_DIR . Env::get('WPFP_PLUGIN_DIR') .'storage/logs/php_error.log',
 
   //app info
-  'developer_app'         =>  'Initflex',
-  'developer_link'        =>  'https://initflex.com/projects/wpframe/',
-  'copyright_app'         =>  'Initflex',
+  'app_name'              =>  Env::get('APP_NAME'),
+  'developer_app'         =>  Env::get('APP_DEV_NAME'),
+  'developer_link'        =>  Env::get('APP_DEV_URL'),
+  'copyright_app'         =>  Env::get('APP_DEV_NAME'),
 
   /* database_table_prefix is ​​used only as a database table prefix configuration only. 
   You still have to initialize if using custom query method */
-  'db_table_prefix'       =>  '',
+  'db_table_prefix'       =>  Env::get('DB_PREFIX'),
+
+  // session
+  'session_save_path_active'  =>  Env::get('SESSION_SAVE_PATH_ACTIVE'),
+  'session_save_path'         =>  WP_PLUGIN_DIR . Env::get('WPFP_PLUGIN_DIR') . Env::get('SESSION_SAVE_PATH'),
 
   //assets
   'assets_url'                    =>  site_url('wp-content/plugins/wpframe/public/assets/'),
@@ -106,8 +113,8 @@ $config = [
 
   'default_upload_dir'  =>  ABSPATH . './wpf-public/uploads/',
   'default_max_size'    =>  '1024', // in Bytes.
-  'default_allow_type'    =>  'png|jpg|jpeg|gif|mp4|webp|webm|avi|3gp|svg|pdf|txt|xls|ppt|docs|doc',
-  'default_max_upload'  =>  '25',
+  'default_allow_type'  =>  'png|jpg|jpeg|gif|mp4|webp|webm|avi|3gp|svg|pdf|txt|xls|ppt|docs|doc',
+  'default_max_upload'  =>  '5',
 
   /** 
    * CodeIgniter 3 prefix config is used to add configuration data required by the 

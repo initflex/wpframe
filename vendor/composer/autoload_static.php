@@ -28,6 +28,10 @@ class ComposerStaticInit534243e87e506902abb635cc15911cba
         array (
             'voku\\' => 5,
         ),
+        'e' => 
+        array (
+            'eftec\\bladeone\\' => 15,
+        ),
         'W' => 
         array (
             'Whoops\\' => 7,
@@ -53,6 +57,10 @@ class ComposerStaticInit534243e87e506902abb635cc15911cba
             'Psr\\Log\\' => 8,
             'Psr\\Container\\' => 14,
             'PhpOption\\' => 10,
+        ),
+        'M' => 
+        array (
+            'Monolog\\' => 8,
         ),
         'J' => 
         array (
@@ -94,6 +102,10 @@ class ComposerStaticInit534243e87e506902abb635cc15911cba
         'voku\\' => 
         array (
             0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
+        ),
+        'eftec\\bladeone\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/eftec/bladeone/lib',
         ),
         'Whoops\\' => 
         array (
@@ -162,6 +174,10 @@ class ComposerStaticInit534243e87e506902abb635cc15911cba
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
         'Jenssegers\\Blade\\' => 
         array (
@@ -252,8 +268,9 @@ class ComposerStaticInit534243e87e506902abb635cc15911cba
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
-        'WPFP\\App\\Models\\M_post' => __DIR__ . '/../..' . '/App/Models/M_post.php',
+        'WPFP\\App\\Models\\M_post' => __DIR__ . '/../..' . '/App/Models/Model1/M_post.php',
         'WPFP\\App\\Models\\M_test' => __DIR__ . '/../..' . '/App/Models/M_test.php',
+        'WPFP\\App\\Models\\M_user' => __DIR__ . '/../..' . '/App/Models/M_user.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

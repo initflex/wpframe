@@ -6,7 +6,9 @@
         "clancats/hydrahon": "^1.1",
         "illuminate/database": "^8.83",
         "illuminate/events": "^8.83",
-        "vlucas/phpdotenv": "^5.5"
+        "vlucas/phpdotenv": "^5.5",
+        "eftec/bladeone": "^4.8",
+        "monolog/monolog": "^2.9"
     },
     "autoload": {
         "classmap": [

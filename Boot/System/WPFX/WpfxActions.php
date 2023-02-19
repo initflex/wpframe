@@ -5,7 +5,7 @@ namespace WPFP\Boot\System\WPFX;
 class WpfxActions extends WpfxFuncsReady
 {
     public $argv;
-    public $CtxVersion  = '0.9.5';
+    public $CtxVersion  = '1.0.0';
     public $CtxDev = 'Initflex';
     public $CtxSite = 'https://initflex.com/projects/wpframe/';
     public $CtxGit = 'https://github.com/initflex/wpframe/';
@@ -59,7 +59,7 @@ class WpfxActions extends WpfxFuncsReady
             elseif (
                 isset($this->argv[1]) && 
                 trim($this->argv[1]) !== '' && 
-                trim($this->argv[1]) == '-create'
+                trim($this->argv[1]) == 'create'
             ) {
                 $this->create('', $this->argv);
                 echo "\n";
@@ -69,9 +69,19 @@ class WpfxActions extends WpfxFuncsReady
             elseif (
                 isset($this->argv[1]) && 
                 trim($this->argv[1]) !== '' && 
-                trim($this->argv[1]) == '-routing'
+                trim($this->argv[1]) == 'routing'
             ) {
                 $this->routing($this->argv);
+                echo "\n";
+            }
+
+            // routing page & menu
+            elseif (
+                isset($this->argv[1]) && 
+                trim($this->argv[1]) !== '' && 
+                trim($this->argv[1]) == 'migration'
+            ) {
+                $this->migration('', $this->argv);
                 echo "\n";
             }
             

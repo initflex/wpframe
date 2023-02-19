@@ -1,0 +1,2 @@
+[2023-02-20T00:20:47.687676+07:00] error_handler_wpframe.ERROR: Undefined constant "abcde" | Line: 67 | File: E:\Applications\laragon\www\development-wpframe\wp6\wp-content\plugins\hello.php | Code: 0 [] []
+[2023-02-20T00:20:48.530527+07:00] error_handler_wpframe.ERROR: Undefined constant "abcde" | Line: 67 | File: E:\Applications\laragon\www\development-wpframe\wp6\wp-content\plugins\hello.php | Code: 0 [] []

@@ -14,6 +14,7 @@ return array(
     'Stringable' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
     'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
     'ValueError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
-    'WPFP\\App\\Models\\M_post' => $baseDir . '/App/Models/M_post.php',
+    'WPFP\\App\\Models\\M_post' => $baseDir . '/App/Models/Model1/M_post.php',
     'WPFP\\App\\Models\\M_test' => $baseDir . '/App/Models/M_test.php',
+    'WPFP\\App\\Models\\M_user' => $baseDir . '/App/Models/M_user.php',
 );

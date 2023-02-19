@@ -1,0 +1,5 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('content'); ?>
+ <p>This is my body content.</p>
+<?php $this->stopSection(); ?>
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('default_wpframe.layouts.part'); } ?>

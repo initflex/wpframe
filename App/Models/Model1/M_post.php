@@ -3,6 +3,7 @@
 namespace WPFP\App\Models;
 use WPFP\Boot\System\Model as WPFPModel;
 use Illuminate\Database\Eloquent\Model;
+
 class M_post extends Model
 {
     public $timestamps = false;
@@ -12,13 +13,13 @@ class M_post extends Model
     *
     * @var string
     */
-    protected $table = "wp_users";
+    protected $table = "wp_posts";
     /**
    * The attributes that are mass assignable.
    *
    * @var array
    */
     protected $fillable = [
-        'user_login', 'user_pass', 'user_nicename', 'user_email', 'user_registered'
+        'ID', 'post_author', 'post_date', 'post_title'
     ];
 }

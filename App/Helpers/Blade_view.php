@@ -4,6 +4,9 @@ namespace WPFP\App\Helpers;
 
 use Jenssegers\Blade\Blade;
 
+/**
+ * Run Blade template engine
+ */
 class Blade_view
 {
 

@@ -3,7 +3,9 @@
 namespace WPFP\App\Controllers;
 
 use WPFP\App\Helpers\Blade_view;
+use WPFP\App\Helpers\Blade;
 use WPFP\Boot\System\Controller;
+use WPFP\App\Models\M_user;
 use WPFP\App\Models\M_post;
 
 class Wpf_dashboard extends Controller
@@ -12,7 +14,8 @@ class Wpf_dashboard extends Controller
     public function __construct()
     {
         // Add Something
-        $this->model('m_post');
+        $this->model('Model1/M_post');
+        $this->model('m_user');
     }
 
     public function index()
@@ -20,7 +23,7 @@ class Wpf_dashboard extends Controller
         var_dump(date("Y-m-d H:m:s"));
 
         // create
-        M_post::create([
+        M_user::create([
             'user_login'    => 'initflex',
             'user_pass'     => 'abcde',
             'user_nicename' => 'initflex',
@@ -31,44 +34,29 @@ class Wpf_dashboard extends Controller
         $data = M_post::all();
 
         foreach ($data as $key => $value){
-            echo $value->user_login .'<br/>';
+            echo $value->ID .'<br/>';
         }
 
         $dataUsers = [
             'name'      =>  wp_get_current_user()->display_name
         ];
 
-        $connection = new \PDO('mysql:host=localhost;dbname=wpframe_wp6;charset=utf8', 'root', '');
+        a
 
-        // create a new mysql query builder
-        $h = new \ClanCats\Hydrahon\Builder('mysql', function($query, $queryString, $queryParameters) use($connection)
-        {
-            $statement = $connection->prepare($queryString);
-            $statement->execute($queryParameters);
+        // New
+        Blade::view('default_wpframe.test');
 
-            // when the query is fetchable return all results and let hydrahon do the rest
-            // (there's no results to be fetched for an update-query for example)
-            if ($query instanceof \ClanCats\Hydrahon\Query\Sql\FetchableInterface)
-            {
-                return $statement->fetchAll(\PDO::FETCH_ASSOC);
-            }
-            // when the query is a instance of a insert return the last inserted id  
-            elseif($query instanceof \ClanCats\Hydrahon\Query\Sql\Insert)
-            {
-                return $connection->lastInsertId();
-            }
-            // when the query is not a instance of insert or fetchable then
-            // return the number os rows affected
-            else 
-            {
-                return $statement->rowCount();
-            }	
-        });
-
-        $people = $h->table('wp_users');
-        $data = $people->select()->get();
-        //var_dump($data);
-
+        // Old - Since RC 1.2.1
         Blade_view::render('default_wpframe/index', $dataUsers);
+    }
+
+    public function test(){
+
+        wpfp_fullscreen();
+
+        echo 'request fullscreen active. <br/> Welcome: '. wp_get_current_user()->display_name;
+
+        wpfp_fullscreen_end();
+
     }
 }
