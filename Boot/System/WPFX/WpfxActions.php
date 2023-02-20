@@ -5,7 +5,7 @@ namespace WPFP\Boot\System\WPFX;
 class WpfxActions extends WpfxFuncsReady
 {
     public $argv;
-    public $CtxVersion  = '1.0.0';
+    public $CtxVersion  = '1.0.2';
     public $CtxDev = 'Initflex';
     public $CtxSite = 'https://initflex.com/projects/wpframe/';
     public $CtxGit = 'https://github.com/initflex/wpframe/';
