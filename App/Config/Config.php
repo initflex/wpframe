@@ -67,6 +67,7 @@ $config = [
   // development mode. if is 'TRUE', you can see display error.
   'dev_mode'              =>  Env::get('APP_DEBUG'),
   'visual_error'          =>  Env::get('VISUAL_ERROR'),
+  'write_log'             =>  Env::get('WRITE_LOG'),
   'error_log_save'        =>  WP_PLUGIN_DIR . Env::get('WPFP_PLUGIN_DIR') .'storage/logs/php_error.log',
 
   //app info

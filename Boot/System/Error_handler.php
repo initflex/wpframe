@@ -17,9 +17,13 @@ class Error_handler {
      */
     public function WPFPErrorHandler($errorSet = '')
     {
-        // create a log channel
-        $log = new Logger('error_handler_wpframe');
-        $log->pushHandler(new StreamHandler($GLOBALS['WPFP_CONFIG']['error_log_save'], Logger::DEBUG));
-        $log->error($errorSet);
+        // create a log file
+        if($GLOBALS['WPFP_CONFIG']['write_log'] == 'true'){
+            $log = new Logger('error_handler_wpframe');
+            $log->pushHandler(new StreamHandler($GLOBALS['WPFP_CONFIG']['error_log_save'], Logger::DEBUG));
+            $log->error($errorSet);
+        }else{
+            // Your code here.
+        }
     }
 }
