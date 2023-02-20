@@ -6,6 +6,8 @@ class MigrationExample {
 
     public function __construct()
     {
+        // This for Example Code.
+        
         Capsule::schema()->create('users', function ($table) {
             $table->increments('id');
             $table->string('name');

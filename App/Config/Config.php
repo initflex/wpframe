@@ -61,8 +61,8 @@ $config = [
   'starter_path'          =>  './App/Starter/',
   'vendor_path'           =>  './vendor/',
   'lang_path'             =>  './App/Lang/',
-  'migrations_path'             =>  './App/Migrations/',
-  'env_path'             =>   './',
+  'migrations_path'       =>  './App/Migrations/',
+  'env_path'              =>   './',
 
   // development mode. if is 'TRUE', you can see display error.
   'dev_mode'              =>  Env::get('APP_DEBUG'),

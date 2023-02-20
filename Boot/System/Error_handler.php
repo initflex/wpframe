@@ -3,7 +3,6 @@
 namespace WPFP\Boot\System;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-use Monolog\FirePHPHandler;
 
 class Error_handler {
 
@@ -12,6 +11,10 @@ class Error_handler {
         // Something code.
     }
 
+    /**
+     * This for crealog log file error PHP.
+     * @param  $errorSet  Error message set.
+     */
     public function WPFPErrorHandler($errorSet = '')
     {
         // create a log channel

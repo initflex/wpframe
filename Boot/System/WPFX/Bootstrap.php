@@ -37,6 +37,28 @@ class Bootstrap
         // include config
         include $this->pathPlugin . $this->configFile;
 
+        $whoops = new \Whoops\Run;
+        $whoops->pushHandler(function($exception, $inspector, $run) {
+            include_once  $this->pathPlugin . $this->pathSystem . 'Error_handler.php';
+            $WPFPErrorHandler = new \WPFP\Boot\System\Error_handler();
+            $WPFPErrorHandler->WPFPErrorHandler($exception->getMessage() .' | Line: '. $exception->getLine() .' | File: '. $exception->getFile() .' | Code: '. $exception->getCode());            
+            
+            print("\033[31m
+==========[ Error Info ]==========\r
+
+Error Line: ". $exception->getLine() ." \r
+Error File: ". $exception->getFile() ." \r
+Error Code: ". $exception->getCode() ." \r
+Error Message: ". $exception->getMessage() ." \r
+
+==============[ End ]=============\r
+\033[0m
+            ");
+
+            return \Whoops\Handler\Handler::DONE;
+        });
+        $whoops->register();
+
         // CTX Functions is Ready
         include __DIR__ .'/WpfxFuncsReady.php';
 
@@ -46,5 +68,6 @@ class Bootstrap
         // run ctx commands
         $wpfxActions = new WpfxActions($this->argv);
         $wpfxActions->goAction();
+                
     }
 }

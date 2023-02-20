@@ -111,18 +111,19 @@ or \r
 (12). Add Frontend Routing \r 
 \033[32m Command: [php wpfx routing -addf '<page name>' '<fcontroller name>' '<namespace>'\033[0m \r 
 \033[32m '<method name>' <first url regex name>' '<last url regex name>'] \033[0m \r
------------------------------------ \r
-(13). Run migration \r 
-\033[32m Command: [php wpfx migration -create '<migration name>'] \r
-
-\033[32m Command: [php wpfx migration -install ] \r
-
 
 Note:
- - The name of the slug is the same as the name of the controller and class
+- The name of the slug is the same as the name of the controller and class
 - Accepted slug names are in lowercase
+
 ----------------------------------- \r
-        ";
+(13). Migration \r 
+-- Create Migration File \r 
+\033[32m Command: [php wpfx migration -create '<migration name>']\033[0m \r 
+
+-- Run Migration \r 
+\033[32m Command: [php wpfx migration -install -all]\033[0m \r 
+";
     }
 
     // create local server
@@ -1183,7 +1184,7 @@ Config file (Froutes.php) not exists. \r\n ". $this->ctxInfoList();
             $createAct == '-create'
         ) { 
             $migrationName = isset($this->argv[3]) ? 
-                $this->cleanSpace(trim($this->argv[3])) : null;
+                'Migration'. $this->cleanSpace(trim($this->argv[3])) : null;
             
             // model check and create
             if ($migrationName !== null && $migrationName !== '') {
@@ -1261,31 +1262,30 @@ Please insert migration name. \r\n ". $this->ctxInfoList();
                 $migrationName == '-all'
             ) {
 
+                error_reporting(E_ALL);
+                ini_set('display_errors', 0);
+
                 $openDirMigrations = opendir($migrationPath);
                 $countMigrationFile = 0;
                 while($itemMigrations = readdir($openDirMigrations)){
         
                     // migration file is exists?
                     $itemSetMigration = $migrationPath . $itemMigrations;
-                    if (!is_dir($itemSetMigration)) {
+                    $checkMigrationTextName = strpos($itemMigrations, 'Migration');
+                    if (!is_dir($itemSetMigration) && $checkMigrationTextName !== FALSE) {
 
-                        ini_set('display_errors', 0);
-                        error_reporting(E_ALL);
+                        // ------include required files
+                        include_once $this->dirPluginCt .'../../../wp-config.php';
+                        include_once $configPath .'Database.php'; 
+                        include_once $migrationPath . $itemMigrations;
 
-                        // run migration
-                        try {
-
-                            // ------include required files
-                            include_once $this->dirPluginCt .'../../../wp-config.php';
-                            include_once $configPath .'Database.php'; 
-                            include_once $migrationPath . $itemMigrations;
-
-                            $getClassName = explode('.', $itemMigrations)[0];
-                            new $getClassName();
-                        }
-                        catch (Exception $e)
-                        {
-                            echo $e->getMessage();
+                        $getClassName = explode('.', $itemMigrations)[0];
+                        $migrationRun = new $getClassName();
+                        
+                        if($migrationRun){
+                            echo "Migration Successfully.";
+                        }else{
+                            echo "Migration Failed.";
                         }
 
                         $countMigrationFile++;
@@ -1310,5 +1310,3 @@ Please insert migration name. \r\n ". $this->ctxInfoList();
         }
     }
 }
-
-

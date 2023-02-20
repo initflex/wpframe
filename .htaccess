@@ -1,0 +1,8 @@
+#block access to php, env, log files
+RewriteEngine on
+RewriteRule ^.*\.php$ - [F,L]
+RewriteRule ^.*\.log$ - [F,L]
+RewriteRule ^.*\.env$ - [F,L]
+
+#block indexes files
+Options -Indexes

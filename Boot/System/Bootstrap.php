@@ -54,6 +54,7 @@ class Bootstrap
             $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
         }
 
+        // Load for create log file Error PHP.
         $whoops->pushHandler(function($exception, $inspector, $run) {
             include_once $this->base_system_dir . 'Error_handler.php';
             $WPFPErrorHandler = new Error_handler();
@@ -62,6 +63,7 @@ class Bootstrap
         });
         $whoops->register();
 
+        // directory separator
         $ds  = DIRECTORY_SEPARATOR;
 
         // run funcs checker
