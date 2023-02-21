@@ -8,18 +8,18 @@
 
 ---
 
-### Tentang WPFrame
+### About WPFrame
 
-WPFrame adalah kerangka kerja kecil untuk membangun sebuah plugin di CMS WordPress dengan mengimplementasikan metode plugin single-instance. WPFrame dibuat menggunakan bahasa program PHP dan diterbitkan dengan lisensi open source MIT yang dapat di gunakan secara bebas untuk tujuan pengembangan kembali.
+WPFrame is a small framework for building a plugin on the WordPress CMS by implementing the single-instance plugin method. WPFrame is created using the PHP programming language and published under the MIT open source license which can be used freely for redevelopment purposes.
 
-WPFrame dalam pengembangannya menggunakan Library dan Helper Eksternal yang berasal dari CodeIgniter 3, Laravel seperti Blade, Eloquent dan lainnya. Untuk itu Anda dapat membaca dokumentasi dari website official kedua framework tersebut juga pustaka dan helper yang ada dalam WPFrame.
+WPFrame in its development uses external libraries and helpers from CodeIgniter 3, Laravel such as Blade, Eloquent and others. For that you can read the documentation from the official website of the two frameworks as well as the libraries and helpers that are in WPFrame.
 
-Pengembangan WPFrame saat ini bertujuan untuk membantu pengembangan dalam membuat plugin WordPress secara cepat dan mudah juga dapat dikerjakan secara terstruktur dengan konsep MVC (Model-View-Controller) juga MVC - FRC (Frontend-Routing-Controller).
+The current development of WPFrame aims to assist development in making WordPress plugins quickly and easily and can be done in a structured manner with the MVC (Model-View-Controller) concept as well as MVC - FRC (Frontend-Routing-Controller).
 
-WPFrame memiliki WPFX (CLI Version) untuk menjalankan beberapa perintah sederhana untuk membantu dalam proses pembuatan Plugin Anda.
+WPFrame has WPFX (CLI Version) to run some simple commands to help in your Plugin build process.
 
 ---
 
-### Dokumentasi
+### Documentation
 
-Untuk dokumentasi dari project WPFrame dapat Anda lihat melalui website Official Initflex [Baca Dokumentasi](https://initflex.com/docs/wpframe/)
+You can see the documentation for the WPFrame project on the Official Initflex website [Read the Documentation](https://initflex.com/docs/wpframe/)
