@@ -1,5 +1,8 @@
 {
-    "require": {
+    "name": "initflex/wpframe",
+    "description": "WordPress Plugin Framework - Create Your Own WordPress Plugins",
+    "type": "project",
+    "require-dev": {
         "cakephp/database": "^4.4",
         "jenssegers/blade": "^1.4",
         "filp/whoops": "^2.14",
@@ -14,5 +17,13 @@
         "classmap": [
             "./App/Models/"
         ]
-    }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "initflex",
+            "email": "initflex22@gmail.com"
+        }
+    ],
+    "require": {}
 }
