@@ -20,6 +20,13 @@ WPFrame has WPFX (CLI Version) to run some simple commands to help in your Plugi
 
 ---
 
+### Install with Composer
+
+`composer create-project initflex/wpframe wpframe`
+
+---
+
+
 ### Documentation
 
 You can see the documentation for the WPFrame project on the Official Initflex website [Read the Documentation](https://initflex.com/docs/wpframe/)
