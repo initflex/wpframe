@@ -5,14 +5,13 @@
  * plugin admin area.
  *
  * @link              https://initflex.com/projects/wpframe/
- * @since             1.0.0
  * @package           WPFrame
  *
  * @wordpress-plugin
  * Plugin Name:       WPFrame
  * Plugin URI:        https://initflex.com/projects/wpframe/
  * Description:       Thank you for using WPFrame. Get started for your creative application :)
- * Version:           2.1.4
+ * Version:           2.1.5
  * Author:            Initflex
  * Author URI:        https://github.com/initflex/wpframe/
  * License:           MIT
