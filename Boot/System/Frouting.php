@@ -237,8 +237,118 @@ namespace WPFP\Boot\System;
                                 }
                             }
                         }
+
                     } else {
-                        // Controller File not found in parent directory. 
+
+                        // Add Something. Method not found in controller. 
+                        // Trying find in parent directory & sub directory and restructure url data & params
+
+                        $controllerFolderSet = ucfirst(str_replace('-', '_', $tempParsingUrl[0]));
+
+                        $controllerLoadFileSetParent = $this->bootConfig->base_fcontroller_dir . $controllerFolderSet . '.php';
+
+                        // check controller file in parent directoy controller
+                        if (file_exists($controllerLoadFileSetParent)) {
+
+                            $controllerFileNameSet = ucfirst($tempParsingUrl[0]);
+                            $controllerFileNameSet = str_replace('-', '_', $controllerFileNameSet);
+
+                            $controllerLoadFileSet = $this->bootConfig->base_fcontroller_dir .  $controllerFileNameSet . '.php';
+
+                            // check controller file if exist
+                            if (file_exists($controllerLoadFileSet)) {
+                                
+                                include_once $controllerLoadFileSet;
+
+                                $trySetMethodFromUrl = isset($tempParsingUrl[1]) ?  
+                                    $tempParsingUrl[1] : $default_set_method;
+                
+                                // unset method name from parsing url.
+                                unset($tempParsingUrl[0]);
+                                unset($tempParsingUrl[1]);
+
+                                // clean parsing url & set data Params
+                                $tryDataCleanParsingUrl = is_array($tempParsingUrl) ? $tempParsingUrl : [];
+                                $tryParamsFromUrl = array_values($tryDataCleanParsingUrl);
+                                
+                                // load method set for call func
+                                $tryLoadMethodSet = str_replace('-', '_', $trySetMethodFromUrl);
+                                $tryLoadMethodSetClean = trim($tryLoadMethodSet) !== '' ? 
+                                    trim($tryLoadMethodSet) : $default_set_method;
+
+                                $try_controller_sets = $this->bootConfig->base_fcontroller_dir . $controllerFolderSet .'/'. $controllerFileNameSet;
+
+                                // auto instance Frontend Controller
+                                $tryControllerLoad = new $controller_set();
+
+                                // check method in controller is set.
+                                if (method_exists($tryControllerLoad, $tryLoadMethodSetClean)) {
+                                    call_user_func_array([$tryControllerLoad, $tryLoadMethodSetClean], $tryParamsFromUrl);
+                                } else {
+                                    // Method not found in controller. 
+                                }
+
+                            } else {
+                                // Controller File not found in directory. 
+                            }
+
+                        }else {
+
+                            // check controller file in any directory in parent controller directory
+
+                            // check set controller name in url
+                            if (isset($tempParsingUrl[1])) {
+
+                                $controllerFileNameSet = ucfirst($tempParsingUrl[1]);
+                                $controllerFileNameSet = str_replace('-', '_', $controllerFileNameSet);
+
+                                $controllerLoadFileSet = $this->bootConfig->base_fcontroller_dir . $controllerFolderSet .'/'. $controllerFileNameSet . '.php';
+
+                                // check controller file if exist
+                                if (file_exists($controllerLoadFileSet)) {
+                                    
+                                    include_once $controllerLoadFileSet;
+
+                                    $trySetMethodFromUrl = isset($tempParsingUrl[2]) ?  
+                                        $tempParsingUrl[2] : $default_set_method;
+                    
+                                    // unset method name from parsing url.
+                                    unset($tempParsingUrl[0]);
+                                    unset($tempParsingUrl[1]);
+
+                                    if (isset($tempParsingUrl[2])) {
+                                        unset($tempParsingUrl[2]);
+                                    }
+
+                                    // clean parsing url & set data Params
+                                    $tryDataCleanParsingUrl = is_array($tempParsingUrl) ? $tempParsingUrl : [];
+                                    $tryParamsFromUrl = array_values($tryDataCleanParsingUrl);
+                                    
+                                    // load method set for call func
+                                    $tryLoadMethodSet = str_replace('-', '_', $trySetMethodFromUrl);
+                                    $tryLoadMethodSetClean = trim($tryLoadMethodSet) !== '' ? 
+                                        trim($tryLoadMethodSet) : $default_set_method;
+
+                                    $try_controller_sets = $this->bootConfig->base_fcontroller_dir . $controllerFolderSet .'/'. $controllerFileNameSet;
+
+                                    // auto instance Frontend Controller
+                                    $tryControllerLoad = new $controller_set();
+
+                                    // check method in controller is set.
+                                    if (method_exists($tryControllerLoad, $tryLoadMethodSetClean)) {
+                                        call_user_func_array([$tryControllerLoad, $tryLoadMethodSetClean], $tryParamsFromUrl);
+                                    } else {
+                                        // Method not found in controller. 
+                                    }
+
+                                } else {
+                                    // Controller File not found in directory. 
+                                }
+
+                            } else {
+                                // Controller name not set in url. 
+                            }
+                        }
                     }
                 } else {
                     // Method not found in Url.
