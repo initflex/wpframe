@@ -1,0 +1,29 @@
+{
+    "name": "initflex/wpframe",
+    "description": "WordPress Plugin Framework - Create Your Own WordPress Plugins",
+    "type": "project",
+    "require-dev": {
+        "cakephp/database": "^4.4",
+        "jenssegers/blade": "^1.4",
+        "filp/whoops": "^2.14",
+        "clancats/hydrahon": "^1.1",
+        "illuminate/database": "^8.83",
+        "illuminate/events": "^8.83",
+        "vlucas/phpdotenv": "^5.5",
+        "eftec/bladeone": "^4.8",
+        "monolog/monolog": "^2.9"
+    },
+    "autoload": {
+        "classmap": [
+            "./App/Models/"
+        ]
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "initflex",
+            "email": "initflex22@gmail.com"
+        }
+    ],
+    "require": {}
+}

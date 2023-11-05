@@ -1,0 +1,13 @@
+#block access to php, env, log files
+RewriteEngine on
+RewriteRule ^.*\.php$ - [F,L]
+RewriteRule ^.*\.log$ - [F,L]
+RewriteRule ^.*\.env$ - [F,L]
+RewriteRule ^.*\wpfx$ - [F,L]
+RewriteRule ^.*\.gitignore$ - [F,L]
+RewriteRule ^composer*\.json$ - [F,L]
+RewriteRule ^composer*\.lock$ - [F,L]
+RewriteRule ^composer*\.phar$ - [F,L]
+
+#block indexes files
+Options -Indexes

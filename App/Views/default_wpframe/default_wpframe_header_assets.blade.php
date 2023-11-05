@@ -1,0 +1,1 @@
+<link rel="stylesheet" href="{{ $assets_dir .'css/default.wpframe.css' }}">

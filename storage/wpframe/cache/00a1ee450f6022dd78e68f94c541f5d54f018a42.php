@@ -1,0 +1,1 @@
+<link rel="stylesheet" href="<?php echo e($assets_dir .'css/default.wpframe.css'); ?>"><?php /**PATH D:\Applications\laragon\www\initflex\wpframe-dev\wp-content\plugins\wpframe\App\Views/default_wpframe/default_wpframe_header_assets.blade.php ENDPATH**/ ?>
